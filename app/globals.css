@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+:root {
+  /* 그림일기 색상 팔레트 */
+  --diary-bg: #FEF6E4;
+  --diary-paper: #FFFDF4;
+  --diary-line: #BDD7EE;
+  --diary-margin: #F4BDBC;
+  --diary-dark: #3E2723;
+  --diary-brown: #6D4C41;
+  --diary-border: #D7C4A8;
+  --diary-orange: #FF7043;
+  --diary-sky: #29B6F6;
+  --diary-green: #66BB6A;
+  --diary-pink: #F06292;
+  --diary-yellow: #FFD54F;
+  --diary-purple: #AB47BC;
+  --diary-red: #EF5350;
+  --diary-shadow: rgba(62, 39, 35, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--diary-bg);
+  --color-foreground: var(--diary-dark);
+  --font-sans: var(--font-noto-kr), "Apple SD Gothic Neo", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--diary-bg);
+  background-image:
+    linear-gradient(rgba(189, 215, 238, 0.35) 1px, transparent 1px);
+  background-size: 100% 36px;
+  color: var(--diary-dark);
+  font-family: var(--font-noto-kr), "Apple SD Gothic Neo", ui-sans-serif, system-ui, sans-serif;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(255, 112, 67, 0.2);
+}
+
+/* 손글씨 폰트 */
+.font-gaegu {
+  font-family: var(--font-gaegu), "Gaegu", cursive;
+}
+
+/* 일기 용지 — 세로줄 효과 */
+.diary-paper {
+  background-color: var(--diary-paper);
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 35px,
+      var(--diary-line) 35px,
+      var(--diary-line) 36px
+    ),
+    linear-gradient(
+      to right,
+      transparent 72px,
+      var(--diary-margin) 72px,
+      var(--diary-margin) 74px,
+      transparent 74px
+    );
+  background-attachment: local;
+}
+
+/* 일기 텍스트영역 — 줄 맞춤 */
+.diary-textarea {
+  background-color: transparent;
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 35px,
+      var(--diary-line) 35px,
+      var(--diary-line) 36px
+    );
+  background-attachment: local;
+  line-height: 36px;
+  padding-top: 4px;
+}
+
+/* 카드 그림자 */
+.diary-card {
+  background: var(--diary-paper);
+  border: 2px solid var(--diary-border);
+  border-radius: 12px;
+  box-shadow:
+    4px 4px 0px rgba(215, 196, 168, 0.6),
+    8px 8px 0px rgba(215, 196, 168, 0.3);
+}
+
+/* 스티커 버튼 베이스 */
+.btn-diary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 2.5px solid transparent;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+  transform: translateY(0);
+}
+
+.btn-diary:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+  background: var(--diary-orange);
+  color: #fff;
+  border-color: #E64A19;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #FF5722;
+  filter: brightness(1.05);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--diary-brown);
+  border-color: var(--diary-border);
+}
+
+.btn-secondary:hover {
+  background: #FAFAFA;
+  border-color: #BCAAA4;
+}
+
+.btn-sky {
+  background: var(--diary-sky);
+  color: #fff;
+  border-color: #0288D1;
+}
+
+.btn-green {
+  background: var(--diary-green);
+  color: #fff;
+  border-color: #388E3C;
+}
+
+.btn-danger {
+  background: #FFEBEE;
+  color: var(--diary-red);
+  border-color: #FFCDD2;
+}
+
+.btn-danger:hover {
+  background: #FFCDD2;
+}
+
+/* 탭 트랜지션 */
+@keyframes diaryPageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-fade {
+  animation: diaryPageIn 0.25s ease both;
+}
+
+/* 그림 테두리 (사진 코너 느낌) */
+.photo-frame {
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(62,39,35,0.18), 0 0 0 1px var(--diary-border);
+}
+
+/* 날씨/기분 뱃지 */
+.mood-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1.5px solid;
+}
+
+/* 진행 단계 */
+.step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2.5px solid;
+  transition: all 0.3s ease;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FEF3D0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--diary-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #BCAAA4;
+}
+
+/* 링 바인딩 효과 (헤더에 사용) */
+.ring-holes::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -1px;
+  right: -1px;
+  height: 0;
+  border-top: 2px dashed rgba(215, 196, 168, 0.7);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
